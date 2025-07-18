@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lev ↔ Euro Converter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fefefe;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 16px;
+      }
+      h1 {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Lev ↔ Euro Converter</h1>
+
+    <label for="lev">Bulgarian Lev (BGN):</label>
+    <input type="number" id="lev" placeholder="Enter amount in BGN" step="any">
+
+    <label for="euro">Euro (EUR):</label>
+    <input type="number" id="euro" placeholder="Enter amount in EUR" step="any">
+  </div>
+
+  <script>
+    const levInput = document.getElementById('lev');
+    const euroInput = document.getElementById('euro');
+
+    const EUR_TO_LEV = 1.95583;
+    const LEV_TO_EUR = 0.511292;
+
+    let isUpdating = false;
+
+    levInput.addEventListener('input', () => {
+      if (isUpdating) return;
+      isUpdating = true;
+      const lev = parseFloat(levInput.value);
+      euroInput.value = isNaN(lev) ? '' : (lev * LEV_TO_EUR).toFixed(2);
+      isUpdating = false;
+    });
+
+    euroInput.addEventListener('input', () => {
+      if (isUpdating) return;
+      isUpdating = true;
+      const euro = parseFloat(euroInput.value);
+      levInput.value = isNaN(euro) ? '' : (euro * EUR_TO_LEV).toFixed(2);
+      isUpdating = false;
+    });
+  </script>
+</body>
+</html>
