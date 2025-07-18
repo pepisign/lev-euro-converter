@@ -80,30 +80,35 @@
     <input type="number" id="euro" placeholder="Enter amount in EUR" step="any">
   </div>
 
-  <script>
-    const levInput = document.getElementById('lev');
-    const euroInput = document.getElementById('euro');
+<script>
+  const levInput = document.getElementById('lev');
+  const euroInput = document.getElementById('euro');
 
-    const EUR_TO_LEV = 1.95583;
-    const LEV_TO_EUR = 0.511292;
+  const EUR_TO_LEV = 1.95583;
+  const LEV_TO_EUR = 0.511292;
 
-    let isUpdating = false;
+  function roundTo2(num) {
+    return Number(num).toFixed(2); // Rounds using "round half up" rule
+  }
 
-    levInput.addEventListener('input', () => {
-      if (isUpdating) return;
-      isUpdating = true;
-      const lev = parseFloat(levInput.value);
-      euroInput.value = isNaN(lev) ? '' : (lev * LEV_TO_EUR).toFixed(6);
-      isUpdating = false;
-    });
+  let isUpdating = false;
 
-    euroInput.addEventListener('input', () => {
-      if (isUpdating) return;
-      isUpdating = true;
-      const euro = parseFloat(euroInput.value);
-      levInput.value = isNaN(euro) ? '' : (euro * EUR_TO_LEV).toFixed(6);
-      isUpdating = false;
-    });
-  </script>
+  levInput.addEventListener('input', () => {
+    if (isUpdating) return;
+    isUpdating = true;
+    const lev = parseFloat(levInput.value);
+    euroInput.value = isNaN(lev) ? '' : roundTo2(lev * LEV_TO_EUR);
+    isUpdating = false;
+  });
+
+  euroInput.addEventListener('input', () => {
+    if (isUpdating) return;
+    isUpdating = true;
+    const euro = parseFloat(euroInput.value);
+    levInput.value = isNaN(euro) ? '' : roundTo2(euro * EUR_TO_LEV);
+    isUpdating = false;
+  });
+</script>
+
 </body>
 </html>
