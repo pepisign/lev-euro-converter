@@ -85,7 +85,7 @@
       if (isUpdating) return;
       isUpdating = true;
       const lev = parseFloat(levInput.value);
-      euroInput.value = isNaN(lev) ? '' : (lev * LEV_TO_EUR).toFixed(5);
+      euroInput.value = isNaN(lev) ? '' : (lev * LEV_TO_EUR).toFixed(6);
       isUpdating = false;
     });
 
